@@ -8,6 +8,8 @@ const env = process.env;
 const stripe = require('stripe')(env.SECRET_KEY);
 
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.listen(env.PORT, console.log('サーバー起動しました。'));
 
 const YOUR_DOMAIN = env.DOMAIN + ':' + env.PORT;
@@ -35,7 +37,6 @@ app.post('/create-portal-session', async (req, res) => {
     // For demonstration purposes, we're using the Checkout session to retrieve the customer ID.
     // Typically this is stored alongside the authenticated user in your database.
 
-    console.log(req.body);
     const { session_id } = req.body;
     const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);
 
