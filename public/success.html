@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>購入ありがとうございます</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="client.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            async function onButtonClick() {
+                session_id = document.getElementById('session-id').value;
+                const data = { session_id: session_id };
+                const res = await axios.post('/create-portal-session', data);
+                console.log(res);
+            }
+        </script>
+    </head>
+    <body>
+        <section>
+            <p>購入ありがとうございます。</p>
+            <!-- <form action="/create-portal-session" method="POST">
+                <input
+                    type="hidden"
+                    id="session-id"
+                    name="session_id"
+                    value=""
+                />
+                <button type="submit" id="checkout-and-portal-button">
+                    領収書を確認する
+                </button>
+            </form> -->
+            <form>
+                <input
+                    type="hidden"
+                    id="session-id"
+                    name="session_id"
+                    value=""
+                />
+                <button
+                    type="submit"
+                    id="checkout-and-portal-button"
+                    onclick="onButtonClick();"
+                >
+                    領収書を確認する
+                </button>
+            </form>
+        </section>
+    </body>
+</html>
